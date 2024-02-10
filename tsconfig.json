@@ -7,6 +7,7 @@
     ],
     "module": "commonjs",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -17,7 +18,11 @@
     "target": "es5"
   },
   "exclude": [
-    "example",
     "node_modules"
+  ],
+  "include":[ 
+    "src/**/*",
+    "test/**/*",
+    "test/**/*.json",
   ]
 }
