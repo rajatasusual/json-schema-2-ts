@@ -1,6 +1,5 @@
-import test from 'ava';
-import { compileFromFile } from '../src';
+import { cast } from './testCast';
+import { compile } from './testCompile';
 
-test('test environment', async t => {
-	await compileFromFile(require('path').resolve(__dirname, './resouces/schema.json')).then(() => t.pass());
-});
+compile();
+cast();
