@@ -1,6 +1,6 @@
 {
   "name": "@rajatasusual/json-schema-2-ts",
-  "version": "13.1.2-3",
+  "version": "13.1.2-4",
   "description": "forked from https://github.com/bcherny/json-schema-to-typescript | compile json schema to typescript typings",
   "main": "dist/src/index.js",
   "bin": {
@@ -45,7 +45,6 @@
   "license": "MIT",
   "homepage": "https://github.com/rajatasusual/jsonSchema2TS#readme",
   "dependencies": {
-    "@bcherny/json-schema-ref-parser": "10.0.5-fork",
     "@types/json-schema": "^7.0.11",
     "@types/lodash": "^4.14.182",
     "@types/prettier": "^2.6.1",
@@ -53,7 +52,7 @@
     "prettier": "^2.6.2"
   },
   "devDependencies": {
-    "@types/node": "^17.0.33",
+    "@types/node": "^20.11.17",
     "ava": "^4.2.0",
     "eslint": "^8.15.0",
     "shx": "^0.3.4",

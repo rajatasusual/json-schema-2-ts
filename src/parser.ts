@@ -378,7 +378,7 @@ function parseSuperTypes(
 ): TNamedInterface[] {
 	// Type assertion needed because of dereferencing step
 	// TODO: Type it upstream
-	const superTypes = schema.extends as SchemaSchema[] | undefined;
+	const superTypes = schema.extends as unknown as SchemaSchema[] | undefined;
 	if (!superTypes) {
 		return [];
 	}

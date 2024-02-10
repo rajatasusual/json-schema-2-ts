@@ -1,6 +1,5 @@
 import { readFileSync } from 'fs';
 import { JSONSchema4 } from 'json-schema';
-import { Options as $RefOptions } from '@bcherny/json-schema-ref-parser';
 import { cloneDeep, endsWith, merge } from 'lodash';
 import { dirname } from 'path';
 import { Options as PrettierOptions } from 'prettier';
@@ -9,20 +8,14 @@ import { generate } from './generator';
 import { normalize } from './normalizer';
 import { optimize } from './optimizer';
 import { parse } from './parser';
-import { dereference } from './resolver';
 import { error, stripExtension, Try, log } from './utils';
 import { validate } from './validator';
-import { isDeepStrictEqual } from 'util';
 import { link } from './linker';
 import { validateOptions } from './optionValidator';
 
 export { EnumJSONSchema, JSONSchema, NamedEnumJSONSchema, CustomTypeJSONSchema } from './types/JSONSchema';
 
 export interface Options {
-	/**
-	 * [$RefParser](https://github.com/BigstickCarpet/json-schema-ref-parser) Options, used when resolving `$ref`s
-	 */
-	$refOptions: $RefOptions;
 	/**
 	 * Default value for additionalProperties, when it is not explicitly set.
 	 */
@@ -79,7 +72,6 @@ export interface Options {
 }
 
 export const DEFAULT_OPTIONS: Options = {
-	$refOptions: {},
 	additionalProperties: true, // TODO: default to empty schema (as per spec) instead
 	bannerComment: `/* eslint-disable */
 /**
@@ -141,16 +133,7 @@ export async function compile(schema: JSONSchema4, name: string, options: Partia
 	// Initial clone to avoid mutating the input
 	const _schema = cloneDeep(schema);
 
-	const { dereferencedPaths, dereferencedSchema } = await dereference(_schema, _options);
-	if (process.env.VERBOSE) {
-		if (isDeepStrictEqual(_schema, dereferencedSchema)) {
-			log('green', 'dereferencer', time(), '✅ No change');
-		} else {
-			log('green', 'dereferencer', time(), '✅ Result:', dereferencedSchema);
-		}
-	}
-
-	const linked = link(dereferencedSchema);
+	const linked = link(_schema);
 	if (process.env.VERBOSE) {
 		log('green', 'linker', time(), '✅ No change');
 	}
@@ -164,7 +147,7 @@ export async function compile(schema: JSONSchema4, name: string, options: Partia
 		log('green', 'validator', time(), '✅ No change');
 	}
 
-	const normalized = normalize(linked, dereferencedPaths, name, _options);
+	const normalized = normalize(linked, name, _options);
 	log('yellow', 'normalizer', time(), '✅ Result:', normalized);
 
 	const parsed = parse(normalized, _options);

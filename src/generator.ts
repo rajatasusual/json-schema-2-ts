@@ -74,7 +74,7 @@ function declareNamedInterfaces(ast: AST, options: Options, rootASTName: string,
 			type = [
 				hasStandaloneName(ast) &&
 					(ast.standaloneName === rootASTName || options.declareExternallyReferenced) &&
-					generateStandaloneInterface(ast, options),
+					generateStandaloneClass(ast, options),
 				getSuperTypesAndParams(ast)
 					.map(ast => declareNamedInterfaces(ast, options, rootASTName, processed))
 					.filter(Boolean)
@@ -179,7 +179,7 @@ function generateRawType(ast: AST, options: Options): string {
 		case 'BOOLEAN':
 			return 'boolean';
 		case 'INTERFACE':
-			return generateInterface(ast, options);
+			return generateClass(ast, options);
 		case 'INTERSECTION':
 			return generateSetOperation(ast, options);
 		case 'LITERAL':
@@ -292,7 +292,7 @@ function generateSetOperation(ast: TIntersection | TUnion, options: Options): st
 	return members.length === 1 ? members[0] : '(' + members.join(' ' + separator + ' ') + ')';
 }
 
-function generateInterface(ast: TInterface, options: Options): string {
+function generateClass(ast: TInterface, options: Options): string {
 	return (
 		`{` +
 		'\n' +
@@ -341,14 +341,15 @@ function generateStandaloneEnum(ast: TEnum, options: Options): string {
 	);
 }
 
-function generateStandaloneInterface(ast: TNamedInterface, options: Options): string {
+function generateStandaloneClass(ast: TNamedInterface, options: Options): string {
 	return (
 		(hasComment(ast) ? generateComment(ast.comment, ast.deprecated) + '\n' : '') +
-		`export class ${toSafeString(ast.standaloneName)} ` +
+		`class ${toSafeString(ast.standaloneName)} ` +
 		(ast.superTypes.length > 0
 			? `extends ${ast.superTypes.map(superType => toSafeString(superType.standaloneName)).join(', ')} `
 			: '') +
-		generateInterface(ast, options)
+		generateClass(ast, options) +
+		`\nmodule.exports = ${toSafeString(ast.standaloneName)}`
 	);
 }
 

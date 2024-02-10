@@ -3,7 +3,7 @@
     "declaration": false,
     "esModuleInterop": true,
     "lib": [
-      "es2015"
+      "ESNext"
     ],
     "module": "commonjs",
     "moduleResolution": "node",
@@ -15,7 +15,9 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es5"
+    "strictPropertyInitialization": false,
+    "target": "esnext",
+    "moduleDetection": "auto"
   },
   "exclude": [
     "node_modules"
