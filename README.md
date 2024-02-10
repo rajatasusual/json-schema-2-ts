@@ -39,7 +39,7 @@ Input:
 
 Output:
 ```ts
-export interface ExampleSchema {
+export class ExampleSchema {
   firstName: string;
   lastName: string;
   /**
@@ -153,8 +153,8 @@ json2ts -i foo.json -o foo.d.ts --style.singleQuote --no-style.semi
 - [x] Local (filesystem) schema references
 - [x] External (network) schema references
 - [x] Add support for running in browser
-- [x] default interface name
-- [x] infer unnamed interface name from filename
+- [x] default class name
+- [x] infer unnamed class name from filename
 - [x] `deprecated`
 - [x] `allOf` ("intersection")
 - [x] `anyOf` ("union")

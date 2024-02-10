@@ -203,15 +203,10 @@ export function generateName(from: string, usedNames: Set<string>) {
 }
 
 export function error(...messages: any[]): void {
-	if (!process.env.VERBOSE) {
-		return console.error(messages);
-	}
-	console.error(getStyledTextForLogging('red')?.('error'), ...messages);
+	return console.error(messages);
 }
 
-type LogStyle = 'blue' | 'cyan' | 'green' | 'magenta' | 'red' | 'white' | 'yellow';
-
-export function log(style: LogStyle, title: string, ...messages: unknown[]): void {
+export function log(...messages: unknown[]): void {
 	if (!process.env.VERBOSE) {
 		return;
 	}
@@ -219,31 +214,9 @@ export function log(style: LogStyle, title: string, ...messages: unknown[]): voi
 	if (messages.length > 1 && typeof messages[messages.length - 1] !== 'string') {
 		lastMessage = messages.splice(messages.length - 1, 1);
 	}
-	console.info(require('cli-color').whiteBright.bgCyan('debug'), getStyledTextForLogging(style)?.(title), ...messages);
+	console.info(messages);
 	if (lastMessage) {
 		console.dir(lastMessage, { depth: 6, maxArrayLength: 6 });
-	}
-}
-
-function getStyledTextForLogging(style: LogStyle): ((text: string) => string) | undefined {
-	if (!process.env.VERBOSE) {
-		return;
-	}
-	switch (style) {
-		case 'blue':
-			return require('cli-color').whiteBright.bgBlue;
-		case 'cyan':
-			return require('cli-color').whiteBright.bgCyan;
-		case 'green':
-			return require('cli-color').whiteBright.bgGreen;
-		case 'magenta':
-			return require('cli-color').whiteBright.bgMagenta;
-		case 'red':
-			return require('cli-color').whiteBright.bgRedBright;
-		case 'white':
-			return require('cli-color').black.bgWhite;
-		case 'yellow':
-			return require('cli-color').whiteBright.bgYellow;
 	}
 }
 
