@@ -64,6 +64,7 @@
     "ignoredByWatcher": [
       "./src"
     ],
+    "failFast": true,
     "snapshotDir": "./test/__snapshots__"
   }
 }

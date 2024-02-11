@@ -344,12 +344,11 @@ function generateStandaloneEnum(ast: TEnum, options: Options): string {
 function generateStandaloneClass(ast: TNamedInterface, options: Options): string {
 	return (
 		(hasComment(ast) ? generateComment(ast.comment, ast.deprecated) + '\n' : '') +
-		`class ${toSafeString(ast.standaloneName)} ` +
+		`export class ${toSafeString(ast.standaloneName)} ` +
 		(ast.superTypes.length > 0
 			? `extends ${ast.superTypes.map(superType => toSafeString(superType.standaloneName)).join(', ')} `
 			: '') +
-		generateClass(ast, options) +
-		`\nmodule.exports = ${toSafeString(ast.standaloneName)}`
+		generateClass(ast, options)
 	);
 }
 
