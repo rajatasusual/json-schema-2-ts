@@ -1,6 +1,6 @@
 {
   "name": "@rajatasusual/json-schema-2-ts",
-  "version": "13.1.2-5",
+  "version": "13.1.2-6",
   "description": "forked from https://github.com/bcherny/json-schema-to-typescript | compile json schema to typescript typings",
   "main": "dist/src/index.js",
   "bin": {
