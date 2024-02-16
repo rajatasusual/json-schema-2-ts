@@ -1,6 +1,6 @@
 # @rajatasusual/json-schema-2-ts [![Build Status][build]](https://github.com/rajatasusual/jsonSchema2TS/actions?query=branch%3Amaster+workflow%3ACI) [![npm]](https://www.npmjs.com/package/@rajatasusual/json-schema-2-ts) [![mit]](https://opensource.org/licenses/MIT)
 
-## Forked from https://github.com/bcherny/@rajatasusual/json-schema-2-ts
+### Forked from https://github.com/bcherny/@rajatasusual/json-schema-2-ts
 
 [build]: https://img.shields.io/github/actions/workflow/status/rajatasusual/jsonSchema2TS/ci.yml?style=flat-square
 [npm]: https://img.shields.io/npm/v/@rajatasusual/json-schema-2-ts.svg?style=flat-square
@@ -39,7 +39,7 @@ Input:
 
 Output:
 ```ts
-class ExampleSchema {
+export class ExampleSchema {
   firstName: string;
   lastName: string;
   /**
@@ -48,8 +48,6 @@ class ExampleSchema {
   age?: number;
   hairColor?: "black" | "brown" | "blue";
 }
-
-module.exports = ExampleSchema;
 ```
 
 ## Installation
