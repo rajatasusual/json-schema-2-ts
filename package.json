@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rajatasusual/jsonSchema2TS.git"
+    "url": "git+https://github.com/rajatasusual/json-schema-2-ts.git"
   },
   "keywords": [
     "json",
@@ -43,7 +43,7 @@
   ],
   "author": "Boris Cherny <boris@performancejs.com> (http://performancejs.com/)",
   "license": "MIT",
-  "homepage": "https://github.com/rajatasusual/jsonSchema2TS#readme",
+  "homepage": "https://github.com/rajatasusual/json-schema-2-ts#readme",
   "dependencies": {
     "@types/json-schema": "^7.0.11",
     "@types/lodash": "^4.14.182",
